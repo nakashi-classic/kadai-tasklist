@@ -1,4 +1,4 @@
-<ul class="list-unstyled">
+ <ul class="list-unstyled">
     @foreach ($tasks as $task)
         <li class="media mb-3">
             <img class="mr-2 rounded" src="{{ Gravatar::src($task->user->email, 50) }}" alt="">
