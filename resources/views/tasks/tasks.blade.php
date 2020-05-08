@@ -7,14 +7,18 @@
                     {!! link_to_route('users.show', $task->user->name, ['id' => $task->user->id]) !!} <span class="text-muted">posted at {{ $task->created_at }}</span>
                 </div>
                 <div>
-                    <p class="mb-0">{!! nl2br(e($task->content)) !!}</p>
+                    <p class="mb-0">{!! nl2br(e($task->status)) !!}</p>
                 </div>
                 <div>
-                    @if (Auth::id() == $task->user_id)
-                        {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                        {!! Form::close() !!}
-                    @endif
+                    <p class="mb-0">{!! nl2br(e($task->content)) !!}</p>
+                </div>
+                <!--<div>-->
+                <!--    @if (Auth::id() == $task->user_id)-->
+                <!--    @include('tasks.create', ['tasks' => $tasks])-->
+                <!--    @endif-->
+                <!--</div>-->
+                <div>
+                <p>{!! link_to_route('tasks.index', 'Tasklist', ['id' => $user->id]) !!}</p>
                 </div>
             </div>
         </li>

@@ -24,8 +24,7 @@ class TasksController extends Controller
                 'user' => $user,
                 'tasks' => $tasks,
             ];
-    }    
-    
+       }
         return view("welcome",$data);
     }
 
@@ -36,8 +35,8 @@ class TasksController extends Controller
      */
     public function create()
     {
-         $task = new Task;
-
+        $task = new Task;
+        
         return view('tasks.create', [
             'task' => $task,
         ]);
@@ -50,18 +49,25 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+       
         $this->validate($request, [
             'status' => 'required|max:10',
             'content' => 'required|max:191',
         ]);
         
-        $request->user()->tasks()->create([
-            'content' => $request->content,
-            'status' => $request->status,
-        ]);
-
-        return back();
+        // $request->user()->tasks()->create([
+        //     'content' => $request->content,
+        //     'status' => $request->status,
+        // ]);
+        
+        $task = new Task;
+        $task -> status =$request->status;
+        $task->content = $request->content;
+        $task->user_id = $request->user()->id;
+        $task->save();
+        
+        return redirect("/");
     }
 
     /**
@@ -72,11 +78,12 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
-
+        $task = \App\Task::find($id);
+       
         return view('tasks.show', [
             'task' => $task,
         ]);
+       
     }
 
     /**
@@ -88,10 +95,13 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-
+        
+        if(\Auth::id()===$task->user_id){
+        
         return view('tasks.edit', [
             'task' => $task,
         ]);
+        }
     }
 
     /**
@@ -111,9 +121,10 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task -> status =$request->status;
         $task->content = $request->content;
+        $task->user_id = $request->user()->id;
         $task->save();
-
-        return redirect('/');
+        
+        return redirect("/");
     }
 
     /**
@@ -130,6 +141,6 @@ class TasksController extends Controller
             $task->delete();
         }
 
-        return back();
+        return redirect("/");
     }
 }
