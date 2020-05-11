@@ -7,12 +7,7 @@
         </aside>
         <div class="col-sm-8">
             @include('users.navtabs', ['user' => $user])
-            <!--@if (Auth::id() == $user->id)-->
-            <!--    @include('tasks.create', ['tasks' => $tasks])-->
-            <!--@endif-->
-            @if (count($tasks) > 0)
-                @include('tasks.tasks', ['tasks' => $tasks])
-            @endif
+            @include('users.users', ['users' => $users])
         </div>
     </div>
 @endsection
