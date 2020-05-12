@@ -3,6 +3,9 @@
 @section('content')
     @if (Auth::check())
     @include('tasks.index', ['tasks' => $tasks])
+    <!--<aside class="col-sm-4">-->
+    <!--            @include('users.card', ['user' => Auth::user()])-->
+    <!--</aside>-->
     @else
         <div class="center jumbotron">
             <div class="text-center">

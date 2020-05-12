@@ -50,7 +50,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {   
-        
+
         $task = new Task;
         $this->validate($request, [
             'status' => 'required|max:10',

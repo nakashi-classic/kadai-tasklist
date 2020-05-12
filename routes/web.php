@@ -23,7 +23,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 // ユーザ機能
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show','followings','followers']]);
     
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
