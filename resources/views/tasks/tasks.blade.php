@@ -7,6 +7,7 @@
                     {!! link_to_route('users.show', $task->user->name, ['id' => $task->user->id]) !!} <span class="text-muted">posted at {{ $task->created_at }}</span>
                 </div>
                 <div>
+                    <p class="mb-0">{!! nl2br(e($task->status)) !!}</p>
                     <p class="mb-0">{!! nl2br(e($task->content)) !!}</p>
                 </div>
             </div>
